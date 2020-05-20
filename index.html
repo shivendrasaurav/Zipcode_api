@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        var myObj;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            myObj = JSON.parse(this.responseText);
+        }
+        };
+        xmlhttp.open("GET", "https://api.postalpincode.in/pincode.json", true);
+        xmlhttp.send();
+
+        
+
+        function searchDistricts(){
+            var newObj = myObj;
+            var val = document.getElementById("pincod").value;
+            var check = newObj.PostOffice.Pincode;
+            if(val === check){
+                document.getElementById("pincod").innerHTML = myObj.PostOffice.district;
+            }
+        }
+
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Code</title>
+</head>
+<body>
+    <label for="pincod">Enter Ur pincode</label>
+    <input type="number" placeholder="picode" id="pincod">
+    <input type="button" value="submit" onclick="searchDistricts()">
+</body>
+</html>
